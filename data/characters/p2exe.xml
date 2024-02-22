@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-character>
+<character x="-20" icon="p2exe" y="210" isGF="false" isPlayer="false" holdTime="6.1" sprite="p2sonic">
+	<anim x="284" loop="false" y="-32" fps="24" anim="Left" name="singLEFT"/>
+	<anim x="-25" loop="false" y="-16" fps="24" anim="Down" name="singDOWN"/>
+	<anim x="3" loop="false" y="275" fps="24" anim="Up" name="singUP"/>
+	<anim x="-28" loop="false" y="-14" fps="24" anim="Right" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="Idle" name="idle"/>
+	<anim x="40" loop="false" y="6" fps="24" anim="GameOver" name="gameover"/>
+</character>
