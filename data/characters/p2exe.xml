@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-20" icon="p2exe" y="210" isGF="false" isPlayer="false" holdTime="6.1" sprite="p2sonic">
+<character x="-20" icon="p2" y="210" isGF="false" isPlayer="false" holdTime="6.1" sprite="p2sonic">
 	<anim x="284" loop="false" y="-32" fps="24" anim="Left" name="singLEFT"/>
 	<anim x="-25" loop="false" y="-16" fps="24" anim="Down" name="singDOWN"/>
 	<anim x="3" loop="false" y="275" fps="24" anim="Up" name="singUP"/>
