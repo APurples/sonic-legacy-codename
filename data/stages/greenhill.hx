@@ -50,6 +50,9 @@ function create(){
     greenhillRings.updateHitbox();
     greenhillRings.antialiasing = Options.antialiasing;
     add(greenhillRings);
+    
+    add(dad);
+    add(boyfriend);
 
     greenHillRocks = new FlxSprite(-1029, 225);
     greenHillRocks.loadGraphic(Paths.image('stages/bg-greenhill/Foreground'));
@@ -58,7 +61,4 @@ function create(){
     greenHillRocks.updateHitbox();
     greenHillRocks.antialiasing = Options.antialiasing;
     add(greenHillRocks);
-
-    add(dad);
-    add(boyfriend);
 }
