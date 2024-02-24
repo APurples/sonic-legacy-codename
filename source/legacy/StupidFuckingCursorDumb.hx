@@ -1,7 +1,7 @@
 class StupidFuckingCursorDumb extends flixel.FlxSprite
 {
 	public var mouseInterest:Bool = false;
-	public var mouseDisabled:Bool = false;
+    public var mouseDisabled:Bool = false;
     public var mouseWaiting:Bool = false;
     public var mouseLockon:Bool = true;
 
@@ -23,7 +23,10 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
 	}
 
     override function update(elapsed:Float){
-        if (!mouseDisabled) FlxG.mouse.visible = false;
+        if (FlxG.save.data.customCursor) FlxG.mouse.visible = false;
+        else FlxG.mouse.visible = true;
+
+        visible = FlxG.save.data.customCursor;
         
         if (mouseLockon) setPosition(FlxG.mouse.getScreenPosition().x - 7.5, FlxG.mouse.getScreenPosition().y - 7.5);
 
@@ -39,7 +42,6 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
                 if (FlxG.mouse.pressed) animation.play(mouseInterest?"handClick":"idleClick",true);
                 if (FlxG.mouse.justPressed) FlxG.sound.play(Paths.sound('xp/windowsXPclick'), 1);
             }
-            
         }
 
     }

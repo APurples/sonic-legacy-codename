@@ -1,0 +1,4 @@
+<!DOCTYPE codename-mod-options>
+<menu name="Rodentrap" desc="yeah man">
+	<checkbox id="customCursor" name="Custom Cursor" desc="If checked, a custom cursor will replace your system cursor"/>
+</menu>

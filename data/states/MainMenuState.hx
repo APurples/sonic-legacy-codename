@@ -1,0 +1,1 @@
+FlxG.mouse.visible = false;

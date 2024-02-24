@@ -2,6 +2,9 @@ static var initialized:Bool = false;
 
 function new(){
     window.title = "Friday Night Funkin': Rodentrap";
+
+    var option = FlxG.save.data;
+    if (option.customCursor == null) option.customCursor = true;
 }
 
 static var redirectStates:Map<FlxState, String> = [
