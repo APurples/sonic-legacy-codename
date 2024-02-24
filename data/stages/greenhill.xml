@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-stage>
+<stage folder="stages/bg-greenhill/" zoom="0.7">
+	<gf>
+		<property type="bool" name="visible" value="false"/>
+	</gf>
+	<dad x="100" y="100"/>
+	<boyfriend x="770" y="100"/>
+	<combo/>
+</stage>

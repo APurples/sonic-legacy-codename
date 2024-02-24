@@ -24,7 +24,7 @@ function create(){
     rSonicOverlay.scale.set(0.9, 0.9);
     rSonicOverlay.updateHitbox();
     rSonicOverlay.blend = 9;
-    rSonicOverlay.clipRect = new FlxRect(0, 0, rSonicOverlay.width-250, rSonicOverlay.height);
+    rSonicOverlay.clipRect = new FlxRect(0, 0, rSonicOverlay.width - 250, rSonicOverlay.height);
     rSonicOverlay.antialiasing = Options.antialiasing;
     add(rSonicOverlay);
 
