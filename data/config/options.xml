@@ -1,4 +1,5 @@
 <!DOCTYPE codename-mod-options>
-<menu name="Rodentrap" desc="yeah man">
+<menu name="Rodentrap" desc="aw yeah chili dogs!">
 	<checkbox id="customCursor" name="Custom Cursor" desc="If checked, a custom cursor will replace your system cursor"/>
+	<checkbox id="botplay" name="Botplay" desc="If checked, a bot will play the game for you."/>
 </menu>

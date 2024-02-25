@@ -2,8 +2,8 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.text.FlxTextBorderStyle;
 import flixel.effects.FlxFlicker;
 import flixel.math.FlxRect;
-import hxvlc.openfl.Video;
 import hxvlc.flixel.FlxVideo;
+import funkin.backend.system.framerate.Framerate;
 
 var transitioning:Bool = false;
 
@@ -12,9 +12,12 @@ function new(){
 
     CoolUtil.playMenuSong();
     Conductor.bpm = 128;
+
+    if(Framerate.isLoaded)
+        startIntro();
 }
 
-function create(){
+function startIntro(){
     bg = new FlxBackdrop(Paths.image('menus/titlescreen/rodentrap/city'));
     bg.velocity.x = 100;
     bg.antialiasing = Options.antialiasing;
@@ -52,11 +55,9 @@ function create(){
 
     b = new FlxSprite().makeSolid(FlxG.width,FlxG.height,FlxColor.BLACK);
     b.alpha = 0;
-    add(b);
 
     vid = new FlxVideo();
     vid.onEndReached.add(vid.dispose);
-    vid.load(Paths.video('intro'));
 }
 
 var tmr:Float = 15;
@@ -86,11 +87,9 @@ function update(elapsed:Float){
 function stepHit(){
     if (curStep <= 13)
         FlxG.camera.visible = false;
-
-    if (curStep == 13){
+    else
         FlxG.camera.visible = true;
-        if (Options.flashingMenu) FlxG.camera.flash(0xD0FFFFFF, 1.25);
-    }
+        //if (Options.flashingMenu) FlxG.camera.flash(0xD0FFFFFF, 1.25);
 }
 
 function measureHit(){

@@ -1,0 +1,5 @@
+<!DOCTYPE codename-engine-week-character>
+<char scale="0.7" x="0" y="-67">
+	<anim name="idle" anim="BF idle dance" fps="24" loop="true" />
+	<anim name="confirm" anim="BF HEY!!" fps="24" loop="false"/>
+</char>

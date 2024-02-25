@@ -1,1 +1,19 @@
-null
+{
+	"beatsPerMeasure": 4,
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"bpm": 110,
+	"difficulties": [
+		"EASY",
+		"NORMAL",
+		"HARD"
+	],
+	"needsVoices": false,
+	"parsedColor": -7376387,
+	"displayName": "free-4-me",
+	"icon": "face",
+	"name": "free-4-me",
+	"color": "#8F71FD",
+	"customValues": {}
+}
