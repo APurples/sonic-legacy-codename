@@ -1,24 +1,87 @@
+import flixel.ui.FlxBar;
+import flixel.text.FlxTextBorderStyle;
+
 public var icoP1:HealthIcon;
 public var icoP2:HealthIcon;
 
+public var healthBarOverlay:FlxSprite;
+
+function create(){
+    timeTxt = new FlxText(0, 19, 400, "X:XX", 22);
+    timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    timeTxt.antialiasing = true;
+    timeTxt.scrollFactor.set();
+    timeTxt.alpha = 0;
+    timeTxt.borderColor = 0xFF000000;
+    timeTxt.borderSize = 2;
+    timeTxt.screenCenter(FlxAxes.X);
+
+    timeBarBG = new FlxSprite();
+    timeBarBG.x = timeTxt.x;
+    timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+    timeBarBG.alpha = 0;
+    timeBarBG.scrollFactor.set();
+    timeBarBG.color = FlxColor.BLACK;
+    timeBarBG.loadGraphic(Paths.image("game/timeBar"));
+
+    timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, FlxBar.FILL_LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), Conductor, 'songPosition', 0, 1);
+    timeBar.scrollFactor.set();
+    timeBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
+    timeBar.numDivisions = 400;
+    timeBar.alpha = 0;
+    timeBar.value = Conductor.songPosition / Conductor.songDuration;
+    timeBar.unbounded = true;
+
+    timeBarBG.x = timeBar.x - 4;
+    timeBarBG.y = timeBar.y - 4;
+
+    timeBar.cameras = [camHUD];
+    timeBarBG.cameras = [camHUD];
+    timeTxt.cameras = [camHUD];
+
+    for (i in [timeBarBG, timeBar, timeTxt]){
+        add(i);
+    }
+}
+
 function postCreate() {
+    healthBarOverlay = new FlxSprite(null, 610).loadGraphic(Paths.image('game/hpBar'));
+    healthBarOverlay.screenCenter(FlxAxes.X);
+    healthBarOverlay.y += 10;
+    healthBarOverlay.flipY = Options.downscroll;
+    healthBarOverlay.cameras = [camHUD];
+    insert(members.indexOf(healthBar) + 1, healthBarOverlay);
+
+    remove(healthBarBG);
+
+    healthBar.scale.set(1, 3.1);
+    healthBar.y -= 2;
+
     icoP1 = new HealthIcon(boyfriend != null ? boyfriend.getIcon() : "face", true);
     icoP2 = new HealthIcon(dad != null ? dad.getIcon() : "face", false);
     for(ico in [icoP1, icoP2]) {
         ico.y = healthBar.y - (ico.height / 2);
         ico.cameras = [camHUD];
     }
-    insert(members.indexOf(healthBar) + 1, icoP1);
-    insert(members.indexOf(healthBar) + 2, icoP2);
+    insert(members.indexOf(healthBarOverlay) + 1, icoP1);
+    insert(members.indexOf(healthBarOverlay) + 2, icoP2);
 
     for (i in [iconP1, iconP2]) remove(i); // fuck you og icons
 }
 
 function update(elapsed:Float){
+    if (inst != null && timeBar != null && timeBar.max != inst.length) timeBar.setRange(0, Math.max(1, inst.length));
+
+    if (inst != null && timeTxt != null) {
+        var timeRemaining = Std.int((inst.length - Conductor.songPosition) / 1000);
+        var seconds = CoolUtil.addZeros(Std.string(timeRemaining % 60), 2);
+        var minutes = Std.int(timeRemaining / 60);
+        timeTxt.text = minutes + ":" + seconds;
+    }
+
     for (ico in [icoP1, icoP2]){
         var mult:Float = FlxMath.lerp(1, ico.scale.x, FlxMath.bound(1 - (elapsed * 27), 0, 1));
         ico.scale.set(mult, mult);
-        ico.updateHitbox();
     }
 
     icoP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * icoP1.scale.x - 150) / 2 - 26;
@@ -28,9 +91,11 @@ function update(elapsed:Float){
     icoP2.health = 1 - (healthBar.percent / 100);
 }
 
+function onSongStart()
+    for (i in [timeBar, timeBarBG, timeTxt]) FlxTween.tween(i, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+
 function beatHit(){
     for (ico in [icoP1, icoP2]){
         ico.scale.set(1.2, 1.2);
-        ico.updateHitbox();
     }
 }

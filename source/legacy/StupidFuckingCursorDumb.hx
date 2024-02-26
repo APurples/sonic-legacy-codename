@@ -35,7 +35,7 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
         if (mouseLockon) setPosition(FlxG.mouse.getScreenPosition(camera).x, FlxG.mouse.getScreenPosition(camera).y);
 
         if (mouseWaiting) {
-            animation.play("waiting");
+            animation.play("waiting", true);
         } else {
             animation.play(mouseInterest?"hand":"idle",true);
             if (mouseDisabled) {

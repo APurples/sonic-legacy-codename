@@ -167,7 +167,6 @@ function lights() {
 var entryGroup:Array<FlxSprite> = [];
 var menuItems:Array<String> = ['play', 'gallery', 'options', 'credits'];
 function addIcons(){
-    
     final offsets:Array<Array<Float>> = [
         [0,0],
         [0,-3],
