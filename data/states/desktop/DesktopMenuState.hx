@@ -149,9 +149,7 @@ function create(){
     camCursor.bgColor = 0x00000000;
     FlxG.cameras.add(camCursor, false);
 
-    cursor = new StupidFuckingCursorDumb(0.4, 0.4);
-    cursor.cameras = [camCursor];
-    cursor.scrollFactor.set(1, 1);
+    cursor = new StupidFuckingCursorDumb(0.4, 0.4, camCursor);
     add(cursor);
 }
 
@@ -330,9 +328,13 @@ var my:Float = 0;
 
 var lerpVal = 0.04;
 function mouseLook() {
-
     mx = (FlxG.mouse.screenX - 640) / 10;
     my = (FlxG.mouse.screenY - 320) / 10;
+
+    if (FlxG.save.data.customCursor){
+        cursor.x = mx / 4;
+        cursor.y = my / 4;
+    }
 
     xx = lerp(xx, mx,lerpVal);
     yy = lerp(yy, my, lerpVal);

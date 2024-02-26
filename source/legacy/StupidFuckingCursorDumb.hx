@@ -7,7 +7,7 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
 
     public var cursorCam:FlxCamera = new FlxCamera();
 
-	public function new(scaleX:Float, scaleY:Float) {
+	public function new(scaleX:Float, scaleY:Float, camera:FlxCamera) {
         frames = Paths.getSparrowAtlas('userinterface/cursor');
         animation.addByPrefix("idle", "idle0", 1, true);
         animation.addByPrefix("idleClick", "idleClick", 1, true);
@@ -17,8 +17,11 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
         animation.addByPrefix("disabledClick", "disabledClick", 1, true);
         animation.addByPrefix("disabled", "disabled", 1, true);
         animation.play("idle");
+
         scrollFactor.set(0, 0); // avoid mouse moving around on its own
+        cameras = [camera];
         scale.set(scaleX, scaleY);
+        
         updateHitbox();
 	}
 
@@ -27,8 +30,10 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
         else FlxG.mouse.visible = true;
 
         visible = FlxG.save.data.customCursor;
+
+        if (camera == null) cameras = [FlxG.camera];
         
-        if (mouseLockon) setPosition(FlxG.mouse.getScreenPosition().x - 7.5, FlxG.mouse.getScreenPosition().y - 7.5);
+        if (mouseLockon) setPosition(FlxG.mouse.getScreenPosition(camera).x, FlxG.mouse.getScreenPosition(camera).y);
 
         if (mouseWaiting) {
             animation.play("waiting");
