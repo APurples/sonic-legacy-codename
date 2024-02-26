@@ -19,7 +19,8 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
         animation.play("idle");
 
         scrollFactor.set(0, 0); // avoid mouse moving around on its own
-        cameras = [camera];
+        if (camera == null) cameras = [FlxG.camera];
+        else cameras = [camera];
         scale.set(scaleX, scaleY);
         
         updateHitbox();
@@ -30,8 +31,6 @@ class StupidFuckingCursorDumb extends flixel.FlxSprite
         else FlxG.mouse.visible = true;
 
         visible = FlxG.save.data.customCursor;
-
-        if (camera == null) cameras = [FlxG.camera];
         
         if (mouseLockon) setPosition(FlxG.mouse.getScreenPosition(camera).x, FlxG.mouse.getScreenPosition(camera).y);
 
