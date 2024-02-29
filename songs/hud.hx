@@ -1,10 +1,21 @@
 import flixel.ui.FlxBar;
 import flixel.text.FlxTextBorderStyle;
 
+/*
+* icon replacements
+*/
 public var icoP1:HealthIcon;
 public var icoP2:HealthIcon;
 
+/*
+* healthbar replacement
+*/
 public var healthBarOverlay:FlxSprite;
+
+/*
+* really useful if youre going to tween the time!!
+*/
+public var barSongLength:Float = inst.length;
 
 function create(){
     timeTxt = new FlxText(0, 19, 400, "X:XX", 22);
@@ -54,7 +65,7 @@ function postCreate() {
 
     remove(healthBarBG);
 
-    healthBar.scale.set(1, 3.1);
+    healthBar.scale.set(1, 3.2);
     healthBar.y -= 2;
 
     icoP1 = new HealthIcon(boyfriend != null ? boyfriend.getIcon() : "face", true);
@@ -70,10 +81,10 @@ function postCreate() {
 }
 
 function update(elapsed:Float){
-    if (inst != null && timeBar != null && timeBar.max != inst.length) timeBar.setRange(0, Math.max(1, inst.length));
+    if (inst != null && timeBar != null && timeBar.max != barSongLength) timeBar.setRange(0, Math.max(1, barSongLength));
 
     if (inst != null && timeTxt != null) {
-        var timeRemaining = Std.int((inst.length - Conductor.songPosition) / 1000);
+        var timeRemaining = Std.int((barSongLength - Conductor.songPosition) / 1000);
         var seconds = CoolUtil.addZeros(Std.string(timeRemaining % 60), 2);
         var minutes = Std.int(timeRemaining / 60);
         timeTxt.text = minutes + ":" + seconds;
